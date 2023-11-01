@@ -16,6 +16,7 @@ import { requestAuth } from './dialogs/auth';
 import { NetworkServiceHandler } from './network/network-service-handler';
 import { ExtensionServiceHandler } from './extension-service-handler';
 import { runDefaultBrowserService } from './services';
+import { createProxyServer } from './utils/proxy-server';
 
 export class Application {
   public static instance = new Application();
@@ -32,6 +33,8 @@ export class Application {
 
   public async start() {
     const gotTheLock = app.requestSingleInstanceLock();
+
+    createProxyServer();
 
     if (!gotTheLock) {
       app.quit();
