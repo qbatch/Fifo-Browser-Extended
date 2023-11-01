@@ -20,10 +20,13 @@ import { TabEvent } from '~/interfaces/tabs';
 import { Queue } from '~/utils/queue';
 import { Application } from './application';
 import { getUserAgentForURL } from './user-agent';
+import * as os from 'os';
 
 interface IAuthInfo {
   url: string;
 }
+
+const { PROXY_PORT } = process.env;
 
 export class View {
   public browserView: BrowserView;
@@ -109,6 +112,14 @@ export class View {
         callback({ requestHeaders: details.requestHeaders });
       },
     );
+
+    const serverIPAddress = Object.values(os.networkInterfaces())
+    .flat()
+    .find((entry) => !entry.internal && entry.family === 'IPv4')?.address;
+
+    this.webContents.session.setProxy({
+      proxyRules: `${serverIPAddress}:${Number(PROXY_PORT)}`,
+    });
 
     ipcMain.handle(`get-error-url-${this.id}`, async () => {
       return this.errorURL;
