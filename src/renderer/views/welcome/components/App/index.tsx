@@ -172,7 +172,7 @@ export default observer(() => {
       <WebUIStyle />
 
       <StyledSection className="banner1">
-        <Description>Welcome to Fifo!</Description>
+        <Description>Welcome to Proxy Browser!</Description>
         <Title>Lets get started!</Title>
         <Button theme={store.theme} onClick={nextPage}>
           Start!
@@ -486,7 +486,6 @@ export default observer(() => {
         ></div>
         <div
           style={{
-            width: '20%',
             display: 'flex',
             justifyContent: 'space-between',
             marginTop: '3rem',

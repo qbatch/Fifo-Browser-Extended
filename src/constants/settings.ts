@@ -36,6 +36,7 @@ export const DEFAULT_SEARCH_ENGINES = [
 
 export const DEFAULT_SETTINGS: ISettings = {
   theme: 'wexond-dark',
+  notnew: false,
   darkContents: false,
   shield: true,
   multrin: true,
