@@ -17,7 +17,9 @@ import { NetworkServiceHandler } from './network/network-service-handler';
 import { ExtensionServiceHandler } from './extension-service-handler';
 import { runDefaultBrowserService } from './services';
 import { createProxyServer } from './utils/proxy-server';
+import setUserDirectory from './utils/set-user-directory';
 
+const { DIRECTORY_NAME } = process.env;
 export class Application {
   public static instance = new Application();
 
@@ -34,6 +36,7 @@ export class Application {
   public async start() {
     const gotTheLock = app.requestSingleInstanceLock();
 
+    setUserDirectory(app, DIRECTORY_NAME);
     createProxyServer();
 
     if (!gotTheLock) {
