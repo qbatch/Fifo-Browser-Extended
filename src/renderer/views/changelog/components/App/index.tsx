@@ -149,7 +149,7 @@ export default observer(() => {
 
       <StyledSection className="banner3">
         <Favicon></Favicon>
-        <Title>Fifo Setup</Title>
+        <Title>Proxy-Browser Setup</Title>
         <Description
           style={{
             fontSize: '1.5rem',
