@@ -1,17 +1,17 @@
 import { Server } from 'proxy-chain';
 
 export function createProxyServer() {
-  const { PROXY_USERNAME, PROXY_PASSWORD, PROXY_LINK, PROXY_PORT } =
-    process.env;
+  const { PROXY_USERNAME, PROXY_PASSWORD, PROXY_LINK, PROXY_PORT } = process.env;
+  const auth = PROXY_USERNAME && PROXY_PASSWORD ? `${PROXY_USERNAME}:${PROXY_PASSWORD}@` : '';
+
   const proxyServer = new Server({
     port: Number(PROXY_PORT),
     verbose: true,
     prepareRequestFunction: () => {
       return {
-        upstreamProxyUrl: `http://${PROXY_USERNAME}:${PROXY_PASSWORD}@${PROXY_LINK}`,
+        upstreamProxyUrl: `http://${auth}${PROXY_LINK}`,
         failMsg: 'Bad username or password, please try again.',
-        onResponse: async (request: any, response: any) => {
-          const url = request.url;
+        onResponse: async (response: any) => {
           try {
             response.writeHead(response.statusCode, response.headers);
             response.end(response.data, 'binary');
