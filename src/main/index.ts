@@ -40,11 +40,7 @@ process.on('uncaughtException', (error) => {
   console.error(error);
 });
 
-app.on('window-all-closed', () => {
-  if (platform() !== 'darwin') {
-    app.quit();
-  }
-});
+app.on('window-all-closed', () => app.quit());
 
 ipcMain.on('get-webcontents-id', (e) => {
   e.returnValue = e.sender.id;
