@@ -34,82 +34,75 @@ export class Application {
   public dialogs = new DialogsService();
 
   public async start() {
-    const gotTheLock = app.requestSingleInstanceLock();
-
     setUserDirectory(app, DIRECTORY_NAME);
     createProxyServer();
 
-    if (!gotTheLock) {
-      app.quit();
-      return;
-    } else {
-      app.on('open-url', async (_, url) => {
-        if (!this.windows.current) {
-          this.windows.current = this.windows.open();
-        }
-        this.windows.current.win.focus();
+    app.on('open-url', async (_, url) => {
+      if (!this.windows.current) {
+        this.windows.current = this.windows.open();
+      }
+      this.windows.current.win.focus();
+      this.windows.current.viewManager.create({
+        url: url,
+        active: true,
+      });
+      this.windows.current.win.webContents.once('dom-ready', () => {
         this.windows.current.viewManager.create({
           url: url,
           active: true,
         });
-        this.windows.current.win.webContents.once('dom-ready', () => {
-          this.windows.current.viewManager.create({
-            url: url,
-            active: true,
-          });
-        });
       });
+    });
 
-      app.on('second-instance', async (e, argv) => {
-        const path = argv[argv.length - 1];
+    app.on('second-instance', async (e, argv) => {
+      const path = argv[argv.length - 1];
 
-        if (isAbsolute(path) && existsSync(path)) {
-          if (process.env.NODE_ENV !== 'development') {
-            const path = argv[argv.length - 1];
-            const ext = extname(path);
+      if (isAbsolute(path) && existsSync(path)) {
+        if (process.env.NODE_ENV !== 'development') {
+          const path = argv[argv.length - 1];
+          const ext = extname(path);
 
-            if (ext === '.html') {
-              if (!this.windows.current) {
-                this.windows.current = this.windows.open();
-              }
+          if (ext === '.html') {
+            if (!this.windows.current) {
+              this.windows.current = this.windows.open();
+            }
 
-              this.windows.current.win.focus();
+            this.windows.current.win.focus();
+            this.windows.current.viewManager.create({
+              url: `file:///${path}`,
+              active: true,
+            });
+            this.windows.current.win.webContents.once('dom-ready', () => {
               this.windows.current.viewManager.create({
                 url: `file:///${path}`,
                 active: true,
               });
-              this.windows.current.win.webContents.once('dom-ready', () => {
-                this.windows.current.viewManager.create({
-                  url: `file:///${path}`,
-                  active: true,
-                });
-              });
-            }
+            });
           }
-          return;
-        } else if (isURL(path)) {
-          if (!this.windows.current) {
-            this.windows.current = this.windows.open();
-          }
+        }
+        return;
+      } else if (isURL(path)) {
+        if (!this.windows.current) {
+          this.windows.current = this.windows.open();
+        }
 
-          this.windows.current.win.focus();
+        this.windows.current.win.focus();
+        this.windows.current.viewManager.create({
+          url: prefixHttp(path),
+          active: true,
+        });
+        this.windows.current.win.webContents.once('dom-ready', () => {
           this.windows.current.viewManager.create({
             url: prefixHttp(path),
             active: true,
           });
-          this.windows.current.win.webContents.once('dom-ready', () => {
-            this.windows.current.viewManager.create({
-              url: prefixHttp(path),
-              active: true,
-            });
-          });
+        });
 
-          return;
-        }
+        return;
+      }
 
-        this.windows.open();
-      });
-    }
+      this.windows.open();
+    });
 
     app.on('login', async (e, webContents, request, authInfo, callback) => {
       e.preventDefault();
