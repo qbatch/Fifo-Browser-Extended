@@ -220,7 +220,7 @@ Currently, we have three repositories: one dedicated to Front-end development, a
             -     nvm use 14.9.0
     - Create **.env** file at root and add environment variables in it.
     - Create **env** folder in public folder and create/place locations env files there. Exact name of the file would be displayed to the user. **Example** London.env
-    - Download [this folder]() and [this folder]() place them inside extraResources folder on the same level as browser folder. **Do not change their name**.
+    - Download [this folder](https://drive.google.com/drive/folders/1WZbUThMiuSLOYHkK-sFE-ARhsbOZzHtK?usp=sharing) and [this folder](https://drive.google.com/drive/folders/1DnLFpQkG7jzltd3rCT97-f8lnBUnzGAG?usp=sharing) place them inside extraResources folder on the same level as browser folder. **Do not change their name**.
     - Create Browser build in Fifo-Browser-Extended repo and paste that build inside **extraResources/browser** folder.
     - **To Install Project dependencies, use the following command:**
         - This project exhibits better compatibility with Yarn compared to npm.
