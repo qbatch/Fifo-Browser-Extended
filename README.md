@@ -166,7 +166,7 @@ Currently, we have three repositories: one dedicated to Front-end development, a
          | ------------ | ------------ | ------------ |
          | created_timestamp | Timestamp | A timestamp when the session was created |
          | last_used_timestamp | Timestamp | A timestamp when the session was last used by the user |
-         | is_active | true, false | TO check if the session is active or not |
+         | is_active | true, false | To check if the session is active or not |
          | device_info | String | To store the info related to the device from which the user is accessing the app |
 
          - **Relations**
