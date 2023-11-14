@@ -14,21 +14,10 @@ const Location = observer(() => {
   return (
     <Row>
       <Title>
-        Fifo is a privacy orientated browser with tons of features such as a
-        built in Ad Blocker. Fifo is made with love by the SnailDOS team. Big
-        thanks to all our contributers...
-        <p></p>
-        <Title>SnailDOS - Development and Code</Title>
-        <p></p>
-        <Title>Wexond - Original Fork</Title>
-        <p></p>
-        <Title>Preknowledge - Contributer</Title>
-        <p></p>
-        <Title>JOshua - Graphic Designer</Title>
-        <p></p>
-        <Title> Mauro Baladés - Contributer</Title>
-        <p></p>
-        <Title>HzzaAwesome - Graphic Designer</Title>
+        ProxyBrowser offers a comprehensive suite of features that have been
+        thoughtfully customized to cater to the discerning needs of individuals
+        who value privacy and seek a high degree of control over their online
+        activities.
       </Title>
     </Row>
   );
@@ -37,8 +26,8 @@ const Location = observer(() => {
 export const About = () => {
   return (
     <>
-      <Header>About Fifo</Header>
-      <Title>Your version of Fifo is v1.3.3</Title>
+      <Header>About Proxy Browser</Header>
+      <Title>Your version of Proxy Browser is v1.0.0</Title>
       <Location />
     </>
   );
