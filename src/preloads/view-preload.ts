@@ -9,6 +9,37 @@ import { injectChromeWebstoreInstallButton } from './chrome-webstore';
 import { contextBridge } from 'electron';
 const tabId = ipcRenderer.sendSync('get-webcontents-id');
 
+(async () => {
+  try {
+    await webFrame.executeJavaScript(
+      `Object.defineProperty(navigator, 'language', {
+        value: 'en-US'
+    })`,
+    );
+    await webFrame.executeJavaScript(
+      `Object.defineProperty(navigator, 'languages', {
+        value: ['en-US']
+    })`,
+    );
+    await webFrame.executeJavaScript(
+      `Object.defineProperty(navigator, 'plugins', {
+        value: []
+    })`,
+    );
+
+    await webFrame.executeJavaScript(
+      `Object.defineProperty(navigator, 'cookieEnabled', {
+        value: false
+    })`,
+    );
+    await webFrame.executeJavaScript(
+      `window.navigator.doNotTrack = { value: 1 }`,
+    )
+  } catch (err) {
+    console.log('error: ', err.stack);
+  }
+})();
+
 export const windowId: number = ipcRenderer.sendSync('get-window-id');
 
 const goBack = async () => {
