@@ -9,35 +9,14 @@ import { injectChromeWebstoreInstallButton } from './chrome-webstore';
 import { contextBridge } from 'electron';
 const tabId = ipcRenderer.sendSync('get-webcontents-id');
 
-(async () => {
-  try {
-    await webFrame.executeJavaScript(
-      `Object.defineProperty(navigator, 'language', {
-        value: 'en-US'
-    })`,
-    );
-    await webFrame.executeJavaScript(
-      `Object.defineProperty(navigator, 'languages', {
-        value: ['en-US']
-    })`,
-    );
-    await webFrame.executeJavaScript(
-      `Object.defineProperty(navigator, 'plugins', {
-        value: []
-    })`,
-    );
+const { LANGUAGE_CODE, LANGUAGES_CODE, PLUGINS_CODE, COOKIES_ENABLED_CODE, DNT_HEADER_CODE } = process.env;
 
-    await webFrame.executeJavaScript(
-      `Object.defineProperty(navigator, 'cookieEnabled', {
-        value: false
-    })`,
-    );
-    await webFrame.executeJavaScript(
-      `window.navigator.doNotTrack = { value: 1 }`,
-    )
-  } catch (err) {
-    console.log('error: ', err.stack);
-  }
+(async () => {
+  await webFrame.executeJavaScript(LANGUAGE_CODE,);
+  await webFrame.executeJavaScript(LANGUAGES_CODE,);
+  await webFrame.executeJavaScript(PLUGINS_CODE,);
+  await webFrame.executeJavaScript(COOKIES_ENABLED_CODE,);
+  await webFrame.executeJavaScript(DNT_HEADER_CODE,);
 })();
 
 export const windowId: number = ipcRenderer.sendSync('get-window-id');

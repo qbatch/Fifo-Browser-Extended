@@ -26,7 +26,7 @@ interface IAuthInfo {
   url: string;
 }
 
-const { PROXY_PORT } = process.env;
+const { PROXY_PORT, DNT_HEADER, LANGUAGE } = process.env;
 
 export class View {
   public browserView: BrowserView;
@@ -106,7 +106,8 @@ export class View {
     this.webContents.session.webRequest.onBeforeSendHeaders(
       (details, callback) => {
         const { object: settings } = Application.instance.settings;
-        if (settings.doNotTrack) details.requestHeaders['DNT'] = '1';
+        details.requestHeaders['DNT'] = DNT_HEADER;
+        details.requestHeaders['Accept-Language'] = LANGUAGE;
         if (settings.globalPrivacyControl)
           details.requestHeaders['Sec-GPC'] = '1';
         callback({ requestHeaders: details.requestHeaders });
