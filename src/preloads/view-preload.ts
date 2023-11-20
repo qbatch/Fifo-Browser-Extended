@@ -12,11 +12,11 @@ const tabId = ipcRenderer.sendSync('get-webcontents-id');
 const { LANGUAGE_CODE, LANGUAGES_CODE, PLUGINS_CODE, COOKIES_ENABLED_CODE, DNT_HEADER_CODE } = process.env;
 
 (async () => {
-  await webFrame.executeJavaScript(LANGUAGE_CODE,);
-  await webFrame.executeJavaScript(LANGUAGES_CODE,);
-  await webFrame.executeJavaScript(PLUGINS_CODE,);
-  await webFrame.executeJavaScript(COOKIES_ENABLED_CODE,);
-  await webFrame.executeJavaScript(DNT_HEADER_CODE,);
+  await webFrame.executeJavaScript(LANGUAGE_CODE);
+  await webFrame.executeJavaScript(LANGUAGES_CODE);
+  await webFrame.executeJavaScript(PLUGINS_CODE);
+  await webFrame.executeJavaScript(COOKIES_ENABLED_CODE);
+  await webFrame.executeJavaScript(DNT_HEADER_CODE);
 })();
 
 export const windowId: number = ipcRenderer.sendSync('get-window-id');
