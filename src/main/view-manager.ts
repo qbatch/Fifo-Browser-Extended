@@ -185,7 +185,9 @@ export class ViewManager extends EventEmitter {
     isNext = false,
     sendMessage = true,
   ) {
-    const view = new View(this.window, details.url, this.incognito);
+    const tabUrl = (this.views.size && details.url) || process.env.HOME_PAGE_URL || details.url;
+    
+    const view = new View(this.window, tabUrl, this.incognito);
 
     const { webContents } = view.browserView;
     const { id } = view;
