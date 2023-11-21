@@ -8,12 +8,13 @@ import { isURL } from '~/utils';
 import { callViewMethod } from '~/utils/view';
 import { ipcRenderer } from 'electron';
 import { ToolbarButton } from '../ToolbarButton';
-import { StyledAddressBar, InputContainer, Input, Text } from './style';
+import { StyledAddressBar, InputContainer, Input, Text, Location } from './style';
 import { ICON_SEARCH } from '~/renderer/constants';
 import { SiteButtons } from '../SiteButtons';
 import { DEFAULT_TITLEBAR_HEIGHT } from '~/constants/design';
 import { NEWTAB_URL } from '~/constants/tabs';
 
+const { DIRECTORY_NAME } = process.env;
 let mouseUpped = false;
 
 const onMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
@@ -165,53 +166,66 @@ export const AddressBar = observer(() => {
   const searchValue = React.useMemo(() => {
     return searchEngine ?? store.addressbarValue;
   }, [store.addressbarValue]);
+
+
+  // console.log("store.tabs.selectedTab?.color: ", store.tabs.selectedTab?.color)
+  // console.log("store.tabs: ", store.tabs)
+  // console.log("store.theme: ", store.tabs)
   return (
-    <StyledAddressBar
-      ref={(r) => (addressbarRef = r)}
-      focus={store.addressbarFocused}
-      color={store.tabs.selectedTab?.color}
-    >
-      <ToolbarButton
-        toggled={false}
-        icon={ICON_SEARCH}
-        size={16}
-        dense
-        inhertTextColor
-        iconStyle={{ transform: 'scale(-1,1)' }}
-      />
-      <InputContainer>
-        <Input
-          ref={(r) => (store.inputRef = r)}
-          spellCheck={false}
-          onKeyDown={onKeyDown}
-          onMouseDown={onMouseDown}
-          onSelect={onSelect}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          onMouseUp={onMouseUp}
-          onChange={onChange}
-          placeholder="Search or type in a URL"
-          visible={!store.addressbarTextVisible || searchValue === ''}
-          value={searchValue}
-        ></Input>
-        <Text visible={store.addressbarTextVisible && searchValue !== ''}>
-          {searchEngine ? (
-            <div>{searchValue}</div>
-          ) : (
-            store.addressbarUrlSegments.map((item, key) => (
-              <div
-                key={key}
-                style={{
-                  opacity: item.grayOut ? 0.54 : 1,
-                }}
-              >
-                {item.value}
-              </div>
-            ))
-          )}
-        </Text>
-      </InputContainer>
-      {!store.isCompact && <SiteButtons />}
-    </StyledAddressBar>
+    <>
+      <StyledAddressBar
+        ref={(r) => (addressbarRef = r)}
+        focus={store.addressbarFocused}
+        color={store.tabs.selectedTab?.color}
+      >
+        <ToolbarButton
+          toggled={false}
+          icon={ICON_SEARCH}
+          size={16}
+          dense
+          inhertTextColor
+          iconStyle={{ transform: 'scale(-1,1)' }}
+        />
+        <InputContainer>
+          <Input
+            ref={(r) => (store.inputRef = r)}
+            spellCheck={false}
+            onKeyDown={onKeyDown}
+            onMouseDown={onMouseDown}
+            onSelect={onSelect}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            onMouseUp={onMouseUp}
+            onChange={onChange}
+            placeholder="Search or type in a URL"
+            visible={!store.addressbarTextVisible || searchValue === ''}
+            value={searchValue}
+          ></Input>
+          <Text visible={store.addressbarTextVisible && searchValue !== ''}>
+            {searchEngine ? (
+              <div>{searchValue}</div>
+            ) : (
+              store.addressbarUrlSegments.map((item, key) => (
+                <div
+                  key={key}
+                  style={{
+                    opacity: item.grayOut ? 0.54 : 1,
+                  }}
+                >
+                  {item.value}
+                </div>
+              ))
+            )}
+          </Text>
+        </InputContainer>
+        {!store.isCompact && <SiteButtons />}
+      </StyledAddressBar>
+      <Location>
+      <span className="font-weight-bold text-capitalize">
+        {DIRECTORY_NAME}
+      </span>
+      </Location>
+     
+    </>
   );
 });

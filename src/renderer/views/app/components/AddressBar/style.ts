@@ -102,3 +102,9 @@ export const Input = styled.input`
     `}
   `};
 `;
+
+export const Location = styled.span`
+  ${({ theme }: { theme: ITheme }) => css`
+    color: ${theme['addressbar.textColor']};
+  `};
+`;
