@@ -9,7 +9,7 @@ import { injectChromeWebstoreInstallButton } from './chrome-webstore';
 import { contextBridge } from 'electron';
 const tabId = ipcRenderer.sendSync('get-webcontents-id');
 
-const { LANGUAGE_CODE, LANGUAGES_CODE, PLUGINS_CODE, COOKIES_ENABLED_CODE, DNT_HEADER_CODE } = process.env;
+const { LANGUAGE_CODE, LANGUAGES_CODE, PLUGINS_CODE, COOKIES_ENABLED_CODE, DNT_HEADER_CODE, TIME_ZONE_CODE } = process.env;
 
 (async () => {
   await webFrame.executeJavaScript(LANGUAGE_CODE);
@@ -17,6 +17,7 @@ const { LANGUAGE_CODE, LANGUAGES_CODE, PLUGINS_CODE, COOKIES_ENABLED_CODE, DNT_H
   await webFrame.executeJavaScript(PLUGINS_CODE);
   await webFrame.executeJavaScript(COOKIES_ENABLED_CODE);
   await webFrame.executeJavaScript(DNT_HEADER_CODE);
+  await webFrame.executeJavaScript(TIME_ZONE_CODE)
 })();
 
 export const windowId: number = ipcRenderer.sendSync('get-window-id');
