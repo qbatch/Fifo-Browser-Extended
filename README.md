@@ -116,6 +116,7 @@ Currently, we have three repositories: one dedicated to Front-end development, a
           -  A **User** has many **Plans**
           -  A **User** has many **Locations**
           -  A **User** has many **Sessions**
+          -  A **User** has many **LocationConfigurations**
 
        - **Locations**
 
@@ -128,6 +129,7 @@ Currently, we have three repositories: one dedicated to Front-end development, a
           - **Relations**
             -  A **Location** belongs to a **User**
             -  A **Location** has one **Session**
+            -  A **Location** has one **LocationConfigurations**
               
        - **OTP**
          | Attribute Name | Possible Values | Description |
@@ -172,6 +174,33 @@ Currently, we have three repositories: one dedicated to Front-end development, a
          - **Relations**
             -  A **Session** belongs to a **User**
             -  A **Session** belongs to a **Location**
+       
+       - **Configurations**  
+         | Attribute Name | Possible Values | Description |
+         | ------------ | ------------ | ------------ |
+         | plugins | String of Array containing plugin objects | A plugins string of array of objects that have info of plugins that would mask the original one |
+         | time_zome | String of timezone and timezone offset | A string containing timezone info that would mask the original one |
+         | resolution | String | A string containing device resolution info that would mask the original one |
+         | fonts | String | A string containing the names of all fonts that would mask the original one |
+         | cookies_enabled | true, false | A check containing whether cookies would be enabled or not |
+         | dnt_header | true, false | A check containing whether Do not track would be set or not |
+         | language | String | A string containing the name of language that would mask the original one |
+         | platform | String | A string containing the name of platform that would mask the original one |
+      
+         - **Relations**
+             - A **Configuration** has one **LocationConfigurations**
+      
+       - **LocationConfigurations**
+         | Attribute Name | Possible Values | Description |
+         | ------------ | ------------ | ------------ |
+         | user_id | Number | ID of User to which location belongs |
+         | location_id | Number | ID of Location to which Configuration belongs |
+         | configuration_id | Number | ID of Configuration |
+
+         - **Relations**
+             - A **LocationConfigurations** belongs to a **Users**
+             - A **LocationConfigurations** belongs to a **Locations**
+             - A **LocationConfigurations** belongs to a **Configurations**  
               
     - **Stripe:**
       - **Paid Services:** The services offered are available on a paid basis.
