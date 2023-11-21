@@ -8,13 +8,19 @@ import { isURL } from '~/utils';
 import { callViewMethod } from '~/utils/view';
 import { ipcRenderer } from 'electron';
 import { ToolbarButton } from '../ToolbarButton';
-import { StyledAddressBar, InputContainer, Input, Text, Location } from './style';
+import {
+  StyledAddressBar,
+  InputContainer,
+  Input,
+  Text,
+  Location,
+} from './style';
 import { ICON_SEARCH } from '~/renderer/constants';
 import { SiteButtons } from '../SiteButtons';
 import { DEFAULT_TITLEBAR_HEIGHT } from '~/constants/design';
 import { NEWTAB_URL } from '~/constants/tabs';
 
-const { DIRECTORY_NAME } = process.env;
+const { LOCATION_NAME } = process.env;
 let mouseUpped = false;
 
 const onMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
@@ -166,11 +172,6 @@ export const AddressBar = observer(() => {
   const searchValue = React.useMemo(() => {
     return searchEngine ?? store.addressbarValue;
   }, [store.addressbarValue]);
-
-
-  // console.log("store.tabs.selectedTab?.color: ", store.tabs.selectedTab?.color)
-  // console.log("store.tabs: ", store.tabs)
-  // console.log("store.theme: ", store.tabs)
   return (
     <>
       <StyledAddressBar
@@ -183,7 +184,6 @@ export const AddressBar = observer(() => {
           icon={ICON_SEARCH}
           size={16}
           dense
-          inhertTextColor
           iconStyle={{ transform: 'scale(-1,1)' }}
         />
         <InputContainer>
@@ -221,11 +221,10 @@ export const AddressBar = observer(() => {
         {!store.isCompact && <SiteButtons />}
       </StyledAddressBar>
       <Location>
-      <span className="font-weight-bold text-capitalize">
-        {DIRECTORY_NAME}
-      </span>
+        <span className="font-weight-bold text-capitalize">
+          {LOCATION_NAME}
+        </span>
       </Location>
-     
     </>
   );
 });
