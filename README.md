@@ -226,27 +226,27 @@ Currently, we have three repositories: one dedicated to Front-end development, a
         - **In Mac OS**
           - **Using brew**
             
-            -     brew install node@14.9.0
+            -     brew install node@18.16.1
             -     brew unlink node
-            -     brew link node@14.9.0
+            -     brew link node@18.16.1
             -     node -v
           - **Using nvm (Node Version Manager)**
             -   To install nvm in Mac OS follow this [link](https://tecadmin.net/install-nvm-macos-with-homebrew/)
               
-            -     nvm install 14.9.0
-            -     nvm use 14.9.0
+            -     nvm install 18.16.1
+            -     nvm use 18.16.1
         - **In Windows**
           - **Using nvm (Node Version Manager)**
             -   To install nvm on a Windows system, you can use this [download link](https://github.com/coreybutler/nvm-windows/releases/download/1.1.11/nvm-setup.exe) for the nvm setup.
               
-            -     nvm install 14.9.0
-            -     nvm use 14.9.0
+            -     nvm install 18.16.1
+            -     nvm use 18.16.1
         - **In Linux/Ubuntu**
           - **Using nvm (Node Version Manager)**
             -   To install nvm in Mac OS follow this [link](https://tecadmin.net/how-to-install-nvm-on-ubuntu-22-04/)
               
-            -     nvm install 14.9.0
-            -     nvm use 14.9.0
+            -     nvm install 18.16.1
+            -     nvm use 18.16.1
     - Create **.env** file at root and add environment variables in it.
     - Create **env** folder in public folder and create/place locations env files there. Exact name of the file would be displayed to the user. **Example** London.env
     - Download [this folder](https://drive.google.com/drive/folders/1WZbUThMiuSLOYHkK-sFE-ARhsbOZzHtK?usp=sharing) and [this folder](https://drive.google.com/drive/folders/1DnLFpQkG7jzltd3rCT97-f8lnBUnzGAG?usp=sharing) place them inside extraResources folder on the same level as browser folder. **Do not change their name**.
@@ -428,7 +428,7 @@ Currently, we have three repositories: one dedicated to Front-end development, a
 1. **Relevant Links**
 
     Please locate the links to the repositories:
-   - [Wexond Browser Extended](https://github.com/qbatch/wexond-browser-extended)
+   - [Fifo Browser Extended](https://github.com/qbatch/Fifo-Browser-Extended)
    - [Proxy Browser Backend](https://github.com/qbatch/proxy-browser-backend)
    - [Proxy Browser](https://github.com/qbatch/proxy-browser)
 2. **Competitor**
