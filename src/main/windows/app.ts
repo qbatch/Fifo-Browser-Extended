@@ -39,7 +39,7 @@ export class AppWindow {
       },
       icon: resolve(
         app.getAppPath(),
-        `static/${isNightly ? 'nightly-icons' : 'icons'}/icon.png`,
+        `proxyBrowserLogos/logo.png`,
       ),
       show: false,
     });
