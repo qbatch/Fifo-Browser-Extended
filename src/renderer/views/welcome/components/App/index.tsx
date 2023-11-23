@@ -464,65 +464,7 @@ export default observer(() => {
       </StyledSection>
 
       <StyledSection className="banner5">
-        <Favicon></Favicon>
-        <Title>Proxy Browser Setup</Title>
-        <Description
-          style={{
-            fontSize: '1.5rem',
-            fontWeight: 500,
-            margin: 0,
-            marginBottom: '48px',
-            opacity: '1',
-          }}
-        >
-          For maximum privacy, set Fifo as your default browser!
-        </Description>
-        <div
-          style={{
-            display: 'flex',
-            width: '15%',
-            justifyContent: 'space-around',
-          }}
-        ></div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: '3rem',
-          }}
-        >
-          <ExtraStyledButton
-            background="transparent"
-            foreground="rgb(138, 180, 248)"
-            style={{ marginLeft: 8 }}
-            onClick={alreadyMaded}
-          >
-            Skip!
-          </ExtraStyledButton>
-          <ExtraStyledButton
-            background="rgb(138, 180, 248)"
-            foreground={
-              store.theme['pages.textColor'] == '#fff' ? 'black' : 'white'
-            }
-            style={{ marginLeft: 8, position: 'relative' }}
-            onClick={addDefault}
-          >
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              Add default browser
-            </div>
-          </ExtraStyledButton>
-        </div>
-      </StyledSection>
-
-      <StyledSection className="banner6">
-        <Description>Fifo is the new privacy orientated browser!</Description>
+        <Description>Proxy Browser is the new privacy orientated browser!</Description>
         <Title>Inbuilt adblocker and more, let's start.</Title>
         <Button theme={store.theme} onClick={commit}>
           Lets get started!
