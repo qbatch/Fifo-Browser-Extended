@@ -240,7 +240,7 @@ const hostname = window.location.href.substr(WEBUI_BASE_URL.length);
 
 if (
   process.env.ENABLE_EXTENSIONS &&
-  window.location.host === 'chrome.google.com'
+  window.location.host === 'chromewebstore.google.com'
 ) {
   injectChromeWebstoreInstallButton();
 }
