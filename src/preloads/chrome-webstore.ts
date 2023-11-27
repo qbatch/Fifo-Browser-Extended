@@ -8,18 +8,21 @@ export const injectChromeWebstoreInstallButton = () => {
     const element = document.querySelector(selector);
     if (element != null) {
       callback(element);
-    } else {
-      setTimeout(() => {
-        waitForCreation(selector, callback);
-      }, 50);
     }
   }
 
-  waitForCreation('button.UywwFc-LgbsSe.UywwFc-LgbsSe-OWXEXe-dgl2Hf', (element: any) => {
-    const warningBanner = document.querySelector('div.gSrP5d');
-    if (warningBanner) warningBanner.remove();
-    InstallButton(document.querySelector('div.OdjmDb'));
-  });
+  function checkAndInjectButton() {
+    if (window.location.href.includes('https://chromewebstore.google.com')) {
+      waitForCreation('button.UywwFc-LgbsSe.UywwFc-LgbsSe-OWXEXe-dgl2Hf', (element: any) => {
+        const warningBanner = document.querySelector('div.gSrP5d');
+        if (warningBanner) warningBanner.remove();
+        InstallButton(document.querySelector('div.OdjmDb'));
+      });
+    }
+  }
+
+  // Use setInterval for periodic checking every 500ms
+  setInterval(checkAndInjectButton, 500);
 
   function installPlugin(
     id: string,
@@ -37,7 +40,7 @@ export const injectChromeWebstoreInstallButton = () => {
   ) {
     if (wrapper == null) return;
     const oldButton = document.querySelector('button.UywwFc-LgbsSe.UywwFc-LgbsSe-OWXEXe-dgl2Hf');
-    oldButton.remove();
+    if (oldButton) oldButton.remove();
     const newButton = document.createElement('button');
     newButton.innerText = 'Add to Proxy Browser';
     newButton.className = 'UywwFc-LgbsSe UywwFc-LgbsSe-OWXEXe-dgl2Hf';
