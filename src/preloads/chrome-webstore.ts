@@ -15,10 +15,20 @@ export const injectChromeWebstoreInstallButton = () => {
     }
   }
 
-  waitForCreation('button.UywwFc-LgbsSe.UywwFc-LgbsSe-OWXEXe-dgl2Hf', (element: any) => {
+  function addButton() {
     const warningBanner = document.querySelector('div.gSrP5d');
     if (warningBanner) warningBanner.remove();
     InstallButton(document.querySelector('div.OdjmDb'));
+  }
+
+  function checkIfRemoved() {
+    const ogButton = document.querySelector('button.UywwFc-LgbsSe.UywwFc-LgbsSe-OWXEXe-dgl2Hf');
+    return ogButton;
+  }
+
+  waitForCreation('button.UywwFc-LgbsSe.UywwFc-LgbsSe-OWXEXe-dgl2Hf', (element: any) => {
+    addButton()
+    setInterval(() => { if (checkIfRemoved()) { addButton() } }, 500)
   });
 
   function installPlugin(
